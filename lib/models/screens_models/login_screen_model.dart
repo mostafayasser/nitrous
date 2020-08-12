@@ -3,12 +3,10 @@ import 'package:flutter/material.dart';
 import '../models/auth.dart';
 
 class LoginScreenModel {
-  static TextEditingController email = TextEditingController();
-  static TextEditingController password = TextEditingController();
+  TextEditingController email = TextEditingController();
+  TextEditingController password = TextEditingController();
 
-  static void login(context) async {
-    await Auth.signup(
-        email: email.text, password: password.text, context: context);
+  void login(context) async {
     await Auth.login(
         email: email.text, password: password.text, context: context);
   }

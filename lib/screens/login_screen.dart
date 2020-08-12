@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../models/screens_models/login_screen_model.dart';
 
 class LoginScreen extends StatelessWidget {
+  final loginModel = LoginScreenModel();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,7 +44,7 @@ class LoginScreen extends StatelessWidget {
                                 padding: EdgeInsets.symmetric(vertical: 10),
                                 width: MediaQuery.of(context).size.width * 0.7,
                                 child: TextField(
-                                  controller: LoginScreenModel.email,
+                                  controller: loginModel.email,
                                   decoration: InputDecoration(
                                     contentPadding: EdgeInsets.symmetric(
                                         horizontal: 30, vertical: 10),
@@ -60,7 +61,7 @@ class LoginScreen extends StatelessWidget {
                               Container(
                                 width: MediaQuery.of(context).size.width * 0.7,
                                 child: TextField(
-                                  controller: LoginScreenModel.password,
+                                  controller: loginModel.password,
                                   obscureText: true,
                                   obscuringCharacter: "*",
                                   decoration: InputDecoration(
@@ -88,10 +89,10 @@ class LoginScreen extends StatelessWidget {
                       width: MediaQuery.of(context).size.width,
                       height: MediaQuery.of(context).size.height * 0.08,
                       child: RaisedButton(
-                        onPressed: () => LoginScreenModel.login(context),
+                        onPressed: () => loginModel.login(context),
                         child: Text("Continue"),
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
