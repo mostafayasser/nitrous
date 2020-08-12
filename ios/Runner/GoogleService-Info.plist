@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>373433212587-ufnq9esdu1ptcuisisp6vsicrdvo9tgt.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.373433212587-ufnq9esdu1ptcuisisp6vsicrdvo9tgt</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>373433212587-2ldjms0pig98ghnov8h25qoft3aqsp19.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBZ6ibuNPO2pQJtzuH-ntijzSXyHPt8Wx0</string>
+	<key>GCM_SENDER_ID</key>
+	<string>373433212587</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.nitrous</string>
+	<key>PROJECT_ID</key>
+	<string>nitrous-c7d4f</string>
+	<key>STORAGE_BUCKET</key>
+	<string>nitrous-c7d4f.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:373433212587:ios:0079c37b32e74f1f27a1ee</string>
+	<key>DATABASE_URL</key>
+	<string>https://nitrous-c7d4f.firebaseio.com</string>
+</dict>
+</plist>

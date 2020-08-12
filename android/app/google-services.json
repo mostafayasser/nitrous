@@ -1,0 +1,127 @@
+{
+  "project_info": {
+    "project_number": "373433212587",
+    "firebase_url": "https://nitrous-c7d4f.firebaseio.com",
+    "project_id": "nitrous-c7d4f",
+    "storage_bucket": "nitrous-c7d4f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:373433212587:android:f79efd4e7da2bd8627a1ee",
+        "android_client_info": {
+          "package_name": "com.example.new_nit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "373433212587-e4eiasirdc7og9otfk2pnj9f7okptnnk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBlt7l2XWljrI-f74LLnRn7qzbWWPLETgQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "373433212587-e4eiasirdc7og9otfk2pnj9f7okptnnk.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "373433212587-fg0i4upi3qd07mps4pmajma83djhaetr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.nitrous"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:373433212587:android:7d0f9e77870a0d3027a1ee",
+        "android_client_info": {
+          "package_name": "com.example.nitrous"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "373433212587-e4eiasirdc7og9otfk2pnj9f7okptnnk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBlt7l2XWljrI-f74LLnRn7qzbWWPLETgQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "373433212587-e4eiasirdc7og9otfk2pnj9f7okptnnk.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "373433212587-fg0i4upi3qd07mps4pmajma83djhaetr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mac.Nitrous"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:373433212587:android:ae0a289c1e25391927a1ee",
+        "android_client_info": {
+          "package_name": "com.theapp.nitrous"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "373433212587-2ldjms0pig98ghnov8h25qoft3aqsp19.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.theapp.nitrous",
+            "certificate_hash": "53e54a6043c56858ed21ae644d34c9ec7a98f833"
+          }
+        },
+        {
+          "client_id": "373433212587-e4eiasirdc7og9otfk2pnj9f7okptnnk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBlt7l2XWljrI-f74LLnRn7qzbWWPLETgQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "373433212587-e4eiasirdc7og9otfk2pnj9f7okptnnk.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "373433212587-fg0i4upi3qd07mps4pmajma83djhaetr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mac.Nitrous"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
