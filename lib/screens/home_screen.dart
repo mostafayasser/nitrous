@@ -1,14 +1,28 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:nitrous/Services/data.dart';
+//import 'package:shared_preferences/shared_preferences.dart';
 
-class TTT extends StatefulWidget {
-  MyAppState createState() => MyAppState();
+class HomeScreen extends StatefulWidget {
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
 }
 
-class MyAppState extends State<TTT> with SingleTickerProviderStateMixin {
+class _HomeScreenState extends State<HomeScreen> {
+  final _firestore = Firestore.instance;
+
+  @override
+  /* Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+  Future<String> _counter; */
+
   @override
   void initState() {
     super.initState();
+    /* _counter = _prefs.then((SharedPreferences prefs) {
+      return (prefs.getString('UID'));
+    }); */
   }
 
   @override
@@ -19,6 +33,9 @@ class MyAppState extends State<TTT> with SingleTickerProviderStateMixin {
   String topic = "Time Documentation";
   String subTopic = "Learn";
   bool switched = false;
+  bool breakTime = false;
+  final data = Data();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,8 +44,8 @@ class MyAppState extends State<TTT> with SingleTickerProviderStateMixin {
           padding: EdgeInsets.zero,
           children: <Widget>[
             UserAccountsDrawerHeader(
-              accountEmail: Text("Mostafa.ashraf.93@gmail.com"),
-              accountName: Text("Mostafa Ashraf"),
+              accountEmail: Text(""),
+              accountName: Text(""),
               decoration: BoxDecoration(
                 color: Colors.blue,
               ),
@@ -53,6 +70,10 @@ class MyAppState extends State<TTT> with SingleTickerProviderStateMixin {
         ),
       ),
       body: Container(
+        /* decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage("assets/images/background.png"),
+                fit: BoxFit.fill)), */
         child: Column(
           children: [
             Stack(
@@ -63,8 +84,9 @@ class MyAppState extends State<TTT> with SingleTickerProviderStateMixin {
                     width: 500,
                     height: 150,
                     decoration: BoxDecoration(
+                        color: Colors.white,
                         borderRadius: BorderRadius.circular(20),
-                        border: Border.all(color: Colors.black)),
+                        border: Border.all(color: Colors.white)),
                     child: Column(
                       children: <Widget>[
                         Padding(
@@ -100,7 +122,7 @@ class MyAppState extends State<TTT> with SingleTickerProviderStateMixin {
                       height: 90.0,
                       child: CircleAvatar(
                         radius: 20,
-                        backgroundImage: NetworkImage(""),
+                        //backgroundImage: NetworkImage(""),
                       ),
                     )),
               ],
@@ -116,100 +138,219 @@ class MyAppState extends State<TTT> with SingleTickerProviderStateMixin {
                     style: TextStyle(
                       fontFamily: 'Modak',
                       fontSize: 24,
-                      color: Colors.black,
+                      color: Colors.white,
                     ),
                   ),
                 ),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 20, right: 20, left: 20),
-              child: Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    border: Border.all(color: Colors.black)),
-                child: Column(
-                  children: [
-                    Align(
-                      alignment: Alignment.center,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 10),
-                        child: Text(
-                          'Currently you are doing...',
-                          style: TextStyle(
-                            fontFamily: 'Modak',
-                            fontSize: 24,
-                            color: Colors.green,
+              padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: Card(
+                  shape:
+                      Border(right: BorderSide(color: Colors.white, width: 5)),
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.only(top: 20, right: 20, left: 20),
+                    child: Column(
+                      children: [
+                        Align(
+                          alignment: Alignment.center,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 10),
+                            child: Text(
+                              'Currently you are doing...',
+                              style: TextStyle(
+                                fontFamily: 'Modak',
+                                fontSize: 24,
+                                color: Colors.green,
+                              ),
+                            ),
                           ),
                         ),
-                      ),
-                    ),
-                    DropdownButton(
-                        value: topic,
-                        items: [
-                          DropdownMenuItem(
-                            child: Text("Time Documentation"),
-                            value: "Time Documentation",
+                        DropdownButton(
+                            value: topic,
+                            items: [
+                              DropdownMenuItem(
+                                child: Text("Time Documentation"),
+                                value: "Time Documentation",
+                              ),
+                            ],
+                            onChanged: (value) {
+                              topic = value;
+                              //notifyListeners();
+                            }),
+                        DropdownButton(
+                            value: subTopic,
+                            items: [
+                              DropdownMenuItem(
+                                child: Text("Learn"),
+                                value: "Learn",
+                              ),
+                              DropdownMenuItem(
+                                child: Text("Teach"),
+                                value: "Teach",
+                              ),
+                              DropdownMenuItem(
+                                child: Text("Break"),
+                                value: "Break",
+                              ),
+                            ],
+                            onChanged: (value) {
+                              setState(() {
+                                subTopic = value;
+                              });
+                              //notifyListeners();
+                            }),
+                        FlatButton.icon(
+                            onPressed: () {},
+                            icon: Icon(Icons.add),
+                            label: Text("Add topic")),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text("End"),
+                            Switch(
+                                value: switched,
+                                onChanged: (value) {
+                                  setState(() {
+                                    switched = value;
+                                    if (value == true) {
+                                      data.startSoloAction(
+                                          topic: topic,
+                                          subTopic: subTopic,
+                                          title: "test");
+                                    } else {
+                                      data.endSoloAction();
+                                    }
+                                  });
+                                }),
+                            Text("Start")
+                          ],
+                        ),
+                        Text("Break"),
+                        Container(
+                          margin: EdgeInsets.symmetric(vertical: 10),
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle, color: Colors.blue),
+                          child: IconButton(
+                            icon: Icon(
+                              breakTime ? Icons.pause : Icons.play_arrow,
+                              color: Colors.white,
+                            ),
+                            onPressed: () {
+                              breakTime ? data.endBreak() : data.startBreak();
+                              setState(() {
+                                breakTime = !breakTime;
+                              });
+                            },
                           ),
-                        ],
-                        onChanged: (value) {
-                          topic = value;
-                          //notifyListeners();
-                        }),
-                    DropdownButton(
-                        value: subTopic,
-                        items: [
-                          DropdownMenuItem(
-                            child: Text("Learn"),
-                            value: "Learn",
-                          ),
-                          DropdownMenuItem(
-                            child: Text("Teach"),
-                            value: "Teach",
-                          ),
-                          DropdownMenuItem(
-                            child: Text("Break"),
-                            value: "Break",
-                          ),
-                        ],
-                        onChanged: (value) {
-                          subTopic = value;
-                          //notifyListeners();
-                        }),
-                    FlatButton.icon(
-                        onPressed: () {},
-                        icon: Icon(Icons.add),
-                        label: Text("Add topic")),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text("End"),
-                        Switch(
-                            value: switched,
-                            onChanged: (value) => switched = value),
-                        Text("Start")
+                        )
                       ],
                     ),
-                    Text("Break"),
-                    Container(
-                      margin: EdgeInsets.symmetric(vertical: 10),
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle, color: Colors.blue),
-                      child: IconButton(
-                        icon: Icon(
-                          Icons.pause,
-                          color: Colors.white,
-                        ),
-                        onPressed: () {},
-                      ),
-                    )
-                  ],
+                  ),
                 ),
               ),
             ),
+            Text(
+              "PROGRESS",
+              style: TextStyle(
+                  color: Colors.grey,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20),
+            ),
+            Container(
+              width: MediaQuery.of(context).size.width * 0.8,
+              height: MediaQuery.of(context).size.height * 0.2,
+              decoration:
+                  BoxDecoration(border: Border.all(color: Colors.black)),
+              child: StreamBuilder(
+                stream: _firestore
+                    .collection('Actions')
+                    .document(Data.user.email)
+                    .collection(Data.user.email)
+                    .orderBy('date', descending: true)
+                    .snapshots(),
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData)
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+
+                  List<DocumentSnapshot> docs = snapshot.data.documents;
+                  //print(docs[0].data["title"]);
+                  return ListView.builder(
+                    itemBuilder: (_, index) {
+                      var color = (docs[index].data["status"] == "Ongoing")
+                          ? Colors.green
+                          : Colors.red;
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: 8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Container(
+                              height: 15,
+                              width: 20,
+                              decoration: BoxDecoration(
+                                  shape: BoxShape.circle, color: color),
+                            ),
+                            Text(
+                              docs[index].data["topic"],
+                              style: TextStyle(color: color),
+                            ),
+                            Text(docs[index].data["subTopic"],
+                                style: TextStyle(color: color)),
+                            Text(docs[index].data["title"],
+                                style: TextStyle(color: color)),
+                            Text(docs[index].data["status"],
+                                style: TextStyle(color: color)),
+                          ],
+                        ),
+                      );
+                    },
+                    itemCount: docs.length,
+                  );
+                },
+              ),
+            )
           ],
         ),
       ),
     );
+  }
+
+  Future<void> addTopic() async {
+    //Create user
+
+    //final SharedPreferences prefs = await _prefs;
+
+    DateTime now = DateTime.now();
+    String startime = DateFormat('kkmm').format(now);
+    String month = DateFormat('MM').format(now);
+    String day = DateFormat('dd').format(now);
+    DocumentReference documentReference =
+        Firestore.instance.collection("Actions").document();
+    documentReference.setData({
+      'title': "",
+      'month': month,
+      'day': day,
+      'startTime': startime,
+      'endTime': "",
+      'duration': "",
+      'Status': "Ongoing",
+      'factor': 1,
+      'userID': "Email",
+      'id': documentReference.documentID,
+    }).then((doc) {
+      print("Topic added successfully}");
+      setState(() {
+        /*  _counter = prefs.setString("UID", documentReference.documentID).then((bool success) {
+          return documentReference.documentID;
+        }); */
+      });
+    });
   }
 }

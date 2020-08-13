@@ -10,7 +10,7 @@ class Test extends StatelessWidget {
       appBar: AppBar(),
       body: Center(
         child: RaisedButton(
-          onPressed: user.uploadPic,
+          onPressed: () {},
           child: Text("upload"),
         ),
       ),
