@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:nitrous/screens/home_screen.dart';
 
-import './screens/login_screen.dart';
+import 'helpers/routes.dart';
+import 'screens/main_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -17,7 +18,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: HomeScreen(),
+      home: MainScreen(),
+      routes: {Routes.homeScreen: (ctx) => HomeScreen()},
     );
   }
 }

@@ -69,7 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
-      body: Container(
+      body: SingleChildScrollView(
         /* decoration: BoxDecoration(
             image: DecorationImage(
                 image: AssetImage("assets/images/background.png"),
@@ -241,7 +241,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               color: Colors.white,
                             ),
                             onPressed: () {
-                              breakTime ? data.endBreak() : data.startBreak();
+                              //breakTime ? data.endBreak() : data.startBreak();
                               setState(() {
                                 breakTime = !breakTime;
                               });
@@ -269,7 +269,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: StreamBuilder(
                 stream: _firestore
                     .collection('Actions')
-                    .document(Data.user.email)
+                    .document()
                     .collection(Data.user.email)
                     .orderBy('date', descending: true)
                     .snapshots(),
@@ -278,7 +278,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     return Center(
                       child: CircularProgressIndicator(),
                     );
-
+                  var x = _firestore.collection('Actions').getDocuments();
+                  x.then((value) => print(value.documents.length));
                   List<DocumentSnapshot> docs = snapshot.data.documents;
                   //print(docs[0].data["title"]);
                   return ListView.builder(
@@ -320,37 +321,5 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
-  }
-
-  Future<void> addTopic() async {
-    //Create user
-
-    //final SharedPreferences prefs = await _prefs;
-
-    DateTime now = DateTime.now();
-    String startime = DateFormat('kkmm').format(now);
-    String month = DateFormat('MM').format(now);
-    String day = DateFormat('dd').format(now);
-    DocumentReference documentReference =
-        Firestore.instance.collection("Actions").document();
-    documentReference.setData({
-      'title': "",
-      'month': month,
-      'day': day,
-      'startTime': startime,
-      'endTime': "",
-      'duration': "",
-      'Status': "Ongoing",
-      'factor': 1,
-      'userID': "Email",
-      'id': documentReference.documentID,
-    }).then((doc) {
-      print("Topic added successfully}");
-      setState(() {
-        /*  _counter = prefs.setString("UID", documentReference.documentID).then((bool success) {
-          return documentReference.documentID;
-        }); */
-      });
-    });
   }
 }

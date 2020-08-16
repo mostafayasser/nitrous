@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:nitrous/models/models/subTopic.dart';
 import 'package:nitrous/models/models/topic.dart';
 
@@ -9,12 +8,17 @@ class SoloAction {
   SubTopic subTopic;
   final DateTime date;
   final String formatedDate;
+  final int day;
+  final int month;
+  final int year;
   int duration;
-  final String startTime;
-  final String endTime;
-  int breakDuration;
+  final int startHour;
+  final int startMin;
+  final int endHour;
+  final int endMin;
+/*   int breakDuration;
   String breakStartTime;
-  String breakEndTime;
+  String breakEndTime; */
   final String userID;
   final double factor;
   String status;
@@ -28,12 +32,17 @@ class SoloAction {
     this.date,
     this.formatedDate,
     this.duration,
-    this.breakDuration,
+/*     this.breakDuration,
     this.breakStartTime,
-    this.breakEndTime,
+    this.breakEndTime, */
     this.userID,
-    this.startTime,
-    this.endTime,
+    this.startHour,
+    this.startMin,
+    this.endHour,
+    this.endMin,
+    this.day,
+    this.month,
+    this.year,
     this.status,
   });
 }

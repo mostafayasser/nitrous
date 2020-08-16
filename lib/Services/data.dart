@@ -11,7 +11,7 @@ import '../models/models/solo_action.dart';
 import '../models/models/user.dart';
 
 class Data {
-  static User user = User(email: "test@test.com", soloActions: []);
+  static User user = User(email: "test1@test.com", soloActions: []);
   SoloAction action;
   final _firestore = Firestore.instance;
   final _storage = FirebaseStorage.instance;
@@ -42,8 +42,10 @@ class Data {
         topic: element.data["topic"],
         subTopic: element.data["subTopic"],
         title: element.data["title"],
-        startTime: element.data["startTime"],
-        endTime: element.data["endTime"],
+        startHour: element.data["startHour"],
+        startMin: element.data["startMin"],
+        endHour: element.data["endHour"],
+        endMin: element.data["endMin"],
         userID: element.data["userID"],
         duration: element.data["duration"],
         status: element.data["status"],
@@ -76,7 +78,7 @@ class Data {
     var formatedDate = DateFormat.yMMMEd().format(date);
     DocumentReference documentReference = _firestore
         .collection("Actions")
-        .document(user.email)
+        .document()
         .collection(user.email)
         .document();
     action = SoloAction(
@@ -84,7 +86,11 @@ class Data {
         topic: Topic(title: topic),
         subTopic: SubTopic(subTopic),
         title: title,
-        startTime: "${date.hour} : ${date.minute}",
+        startHour: date.hour,
+        startMin: date.minute,
+        day: date.day,
+        month: date.month,
+        year: date.year,
         date: date,
         formatedDate: formatedDate,
         factor: 1,
@@ -96,12 +102,16 @@ class Data {
       "topic": action.topic.title,
       "subTopic": action.subTopic.title,
       "title": action.title,
-      "startTime": "${action.startTime}",
+      "startHour": action.startHour,
+      "startMin": action.startMin,
+      "day": action.day,
+      "month": action.month,
+      "year": action.year,
       "endTime": "${date.hour} : ${date.minute}",
       "duration": action.duration,
-      "breakStartTime": action.breakStartTime,
+/*       "breakStartTime": action.breakStartTime,
       "breakEndTime": action.breakEndTime,
-      "breakDuration": action.breakDuration,
+      "breakDuration": action.breakDuration, */
       "formatedDate": action.formatedDate,
       "date": action.date,
       "factor": 1,
@@ -114,9 +124,8 @@ class Data {
 
   void endSoloAction() {
     var date = DateTime.now();
-    var start = action.startTime.split(":");
-    var duration = ((date.hour - int.parse(start[0])) * 60) +
-        (date.minute - int.parse(start[1]));
+    var duration =
+        ((date.hour - action.startHour) * 60) + (date.minute - action.startMin);
     DocumentReference documentReference = _firestore
         .collection("Actions")
         .document(user.email)
@@ -124,13 +133,14 @@ class Data {
         .document(action.id);
     documentReference.updateData({
       "duration": duration,
-      "endTime": "${date.hour} : ${date.minute}",
+      "endHour": date.hour,
+      "endMin": date.minute,
       "status": "Done"
     });
     action = null;
   }
 
-  void startBreak() {
+  /* void startBreak() {
     var date = DateTime.now();
     DocumentReference documentReference = _firestore
         .collection("Actions")
@@ -155,5 +165,5 @@ class Data {
       "breakEndTime": "${date.hour} : ${date.minute}",
       "breakDuration": duration
     });
-  }
+  } */
 }

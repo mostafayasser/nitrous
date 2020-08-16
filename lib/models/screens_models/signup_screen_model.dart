@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:nitrous/helpers/routes.dart';
 
 import '../models/auth.dart';
 
@@ -14,12 +15,18 @@ class SignUpScreenModel {
     final done = await Auth.signup(
         email: email.text, password: password.text, context: context);
     if (done) {
-      await _fireStore.collection("Users").document(email.text).setData({
+      await _fireStore
+          .collection("Nitrous")
+          .document("Users")
+          .collection("Users")
+          .document(email.text)
+          .setData({
         "email": email.text,
         "userName": userName.text,
         "jobTitle": jobTitle.text,
         "imgUrl": ""
       });
+      Navigator.of(context).pushReplacementNamed(Routes.homeScreen);
     }
   }
 }

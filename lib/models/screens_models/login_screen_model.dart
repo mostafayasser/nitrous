@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nitrous/helpers/routes.dart';
 
 import '../models/auth.dart';
 
@@ -7,7 +8,10 @@ class LoginScreenModel {
   TextEditingController password = TextEditingController();
 
   void login(context) async {
-    await Auth.login(
+    bool loggedIn = await Auth.login(
         email: email.text, password: password.text, context: context);
+    if (loggedIn) {
+      Navigator.of(context).pushReplacementNamed(Routes.homeScreen);
+    }
   }
 }
